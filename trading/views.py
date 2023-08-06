@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 import os
 from django.shortcuts import render, redirect
@@ -5,6 +7,16 @@ from .models import Portfolio, Stock
 import yfinance as yf
 from django.conf import settings
 import matplotlib.pyplot as plt 
+
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = User.objects.create_user(username=username, password=password)
+        login(request, user)
+        return redirect('portfolio')
+    return render(request, 'register.html')
 
 @login_required
 def portfolio(request):
