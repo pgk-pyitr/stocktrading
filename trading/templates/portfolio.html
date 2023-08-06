@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Your Portfolio</h1>
+    <p>Balance: ${{ portfolio.balance }}</p>
+    <table>
+        <tr>
+            <th>Symbol</th>
+            <th>Quantity</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'buy_stock' %}">Buy Stocks</a>
+    <a href="{% url 'sell_stock' %}">Sell Stocks</a>
+</body>
+</html>
+
+{% endblock %}
