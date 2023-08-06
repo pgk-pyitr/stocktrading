@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}Chart{% endblock %}
+{% block title %}Show Chart{% endblock %}
 
 {% block content %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stock Chart</title>
+    <title>Show Chart</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Stock Chart</h1>
-    <img src="{{ image_url }}" alt="Stock chart">
+    <h1>Show Chart</h1>
+    <img src="{{ image_url }}" alt="Show chart">
     <a href="{% url 'portfolio' %}">Back to Portfolio</a>
 </body>
 </html>
