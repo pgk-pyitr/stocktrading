@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import os
 from django.shortcuts import render, redirect
 from .models import Portfolio, Stock
 import yfinance as yf
@@ -29,8 +28,8 @@ def user_login(request):
             login(request, user)
             return redirect('portfolio')
         else:
-            return render(request, 'login.html', {'error': 'Invalid username or password'})
-    return render(request, 'login.html')
+            return render(request, 'user_login.html', {'error': 'Invalid username or password'})
+    return render(request, 'user_login.html')
 
 @login_required
 def user_logout(request):
