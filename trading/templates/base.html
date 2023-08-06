@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Stock Trading{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Stock Trading Platform</h1>
+        <nav>
+            <a href="{% url 'portfolio' %}">Portfolio</a>
+            <a href="{% url 'buy_stock' %}">Buy</a>
+            <a href="{% url 'sell_stock' %}">Sell</a>
+            <a href="{% url 'stock_chart' %}">Charts</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2023 Your Trading Platform</p>
+    </footer>
+</body>
+</html>
