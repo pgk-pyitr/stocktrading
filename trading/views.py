@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
+import os
 from django.shortcuts import render, redirect
 from .models import Portfolio, Stock
 import yfinance as yf
-import matplotlib.pyplot as plt
+from django.conf import settings
+import matplotlib.pyplot as plt 
 
 @login_required
 def portfolio(request):
@@ -62,4 +64,21 @@ def show_chart(request, symbol):
     data['Close'].plot()
     plt.savefig('static/chart.png')
     return render(request, 'chart.html')
+
+def stock_chart(request):
+    x = [1, 2, 3, 4, 5]
+    y = [10, 20, 30, 20, 10]
+
+    plt.plot(x, y)
+    plt.xlabel('Time')
+    plt.ylabel('Price')
+    plt.title('Stock Price Over Time')
+
+    image_path = os.path.join(settings.STATIC_ROOT, 'images', 'plot.png')
+    plt.savefig(image_path)
+
+    image_url = os.path.join(settings.STATIC_URL, 'images', 'plot.png')
+
+    return render(request, 'chart.html', {'image_url': image_url})
+
 
