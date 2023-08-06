@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import os
 from django.shortcuts import render, redirect
@@ -17,6 +17,24 @@ def register(request):
         login(request, user)
         return redirect('portfolio')
     return render(request, 'register.html')
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('portfolio')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid username or password'})
+    return render(request, 'login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('user_login')
+
 
 @login_required
 def portfolio(request):
