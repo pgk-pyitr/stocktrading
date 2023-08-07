@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Portfolio, Stock
 import yfinance as yf
-from django.conf import settings
 import matplotlib.pyplot as plt 
 
 def home(request):
@@ -17,7 +16,10 @@ def register(request):
         user = User.objects.create_user(username=username, password=password)
         login(request, user)
         return redirect('portfolio')
-    return render(request, 'register.html')
+    message = ""
+    if request.GET.get('next') in ['/buy/', '/sell/']:
+        message = "You must be logged in to buy or sell stocks."
+    return render(request, 'register.html', {'message': message})
 
 def user_login(request):
     if request.method == 'POST':
@@ -103,7 +105,7 @@ def show_chart(request, symbol):
     stock = yf.Ticker(symbol)
     data = stock.history(period='1d')
     data['Close'].plot()
-    plt.savefig('static/chart.png')
+    plt.savefig('static/images/chart.png')
     return render(request, 'show_chart.html')
 
 
