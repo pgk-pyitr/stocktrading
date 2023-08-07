@@ -75,7 +75,7 @@ p.error {
 form {
     width: 300px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -97,15 +97,15 @@ input {
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: blue;
+    color: #0c0c0c;
     border: none;
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #333366;
 }
 
 p {
