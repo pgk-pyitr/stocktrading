@@ -4,15 +4,15 @@
 {% block title %}Portfolio{% endblock %}
 
 {% block content %}
-<html>
+
 <head>
     <title>Portfolio</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Your Portfolio</h1>
+    <h1 class="your_porfolio">Your Portfolio</h1>
     <p>Balance: ${{ portfolio.balance }}</p>
-    <table>
+    <table class="portfolio_table">
         <tr>
             <th>Symbol</th>
             <th>Quantity</th>
@@ -27,6 +27,6 @@
     <a href="{% url 'buy_stock' %}">Buy Stocks</a>
     <a href="{% url 'sell_stock' %}">Sell Stocks</a>
 </body>
-</html>
+
 
 {% endblock %}

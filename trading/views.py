@@ -15,7 +15,8 @@ def register(request):
         password = request.POST['password']
         user = User.objects.create_user(username=username, password=password)
         login(request, user)
-        return redirect('portfolio')
+        return redirect(request.GET.get('next', 'portfolio'))
+
     message = ""
     if request.GET.get('next') in ['/buy/', '/sell/']:
         message = "You must be logged in to buy or sell stocks."
@@ -100,13 +101,13 @@ def sell_stock(request):
 
     return render(request, 'sell_stock.html', {'message': message})
 
-
 def show_chart(request, symbol):
     stock = yf.Ticker(symbol)
     data = stock.history(period='1d')
     data['Close'].plot()
     plt.savefig('static/images/chart.png')
     return render(request, 'show_chart.html')
+
 
 
 
