@@ -102,11 +102,18 @@ def sell_stock(request):
     return render(request, 'sell_stock.html', {'message': message})
 
 def show_chart(request, symbol):
-    stock = yf.Ticker(symbol)
-    data = stock.history(period='1d')
-    data['Close'].plot()
-    plt.savefig('static/images/chart.png')
-    return render(request, 'show_chart.html')
+    try:
+        stock = yf.Ticker(symbol)
+        data = stock.history(period='1d')
+        data['Close'].plot()
+        image_path = 'static/images/chart.png'
+        plt.savefig('static/images/chart.png')
+        message = None
+        
+    except Exception as e:
+        message = "An error occurred while fetching the chart. Please try again later."
+        image_path = None
+        return render(request, 'show_chart.html', {'image_path': image_path,'message': message})
 
 
 

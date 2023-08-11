@@ -11,7 +11,10 @@
 </head>
 <body>
     <h1>Show Chart</h1>
-    <img src="{{ image_url }}" alt="Show chart">
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    <img src="{% static 'images/chart.png' %}" alt="Chart">
     <a href="{% url 'portfolio' %}">Back to Portfolio</a>
 </body>
 
