@@ -20,6 +20,7 @@ def register(request):
     message = ""
     if request.GET.get('next') in ['/buy/', '/sell/']:
         message = "You must be logged in to buy or sell stocks."
+        
     return render(request, 'register.html', {'message': message})
 
 def user_login(request):
