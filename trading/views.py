@@ -11,17 +11,23 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = User.objects.create_user(username=username, password=password)
-        login(request, user)
-        return redirect(request.GET.get('next', 'portfolio'))
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-    message = ""
-    if request.GET.get('next') in ['/buy/', '/sell/']:
-        message = "You must be logged in to buy or sell stocks."
-        
+        if username and password:
+            user = User.objects.create_user(username=username, password=password)
+            login(request, user)
+            return redirect(request.GET.get('next', 'portfolio'))
+        else:
+            message = "Username and password are required."
+
+    else:
+        message = ""
+        if request.GET.get('next') in ['/buy/', '/sell/']:
+            message = "You must be logged in to buy or sell stocks."
+
     return render(request, 'register.html', {'message': message})
+
 
 def user_login(request):
     if request.method == 'POST':
