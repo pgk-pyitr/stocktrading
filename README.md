@@ -1,0 +1,2 @@
+# stocktrading project
+- Django project
